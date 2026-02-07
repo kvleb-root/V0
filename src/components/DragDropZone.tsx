@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useRef } from 'react'
-import { Upload, File } from 'lucide-react'
+import { Upload } from 'lucide-react'
 import clsx from 'clsx'
 
 interface DragDropZoneProps {

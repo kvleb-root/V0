@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react'
 import { DataSource } from '@/types/index'
-import { parseCSV, parseExcel, validateData, inferColumnTypes } from '@/lib/data-parser'
+import { parseCSV, parseExcel, validateData } from '@/lib/data-parser'
 
 export function useDataSource() {
   const [dataSources, setDataSources] = useState<DataSource[]>([])

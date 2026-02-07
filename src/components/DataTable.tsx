@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { QueryResult, DataPoint } from '@/types/index'
+import { DataPoint } from '@/types/index'
 
 interface DataTableProps {
   data: DataPoint[]

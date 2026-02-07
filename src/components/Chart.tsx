@@ -18,7 +18,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts'
-import { QueryResult, DataPoint } from '@/types/index'
+import { DataPoint } from '@/types/index'
 
 interface ChartProps {
   type: 'bar' | 'line' | 'pie' | 'scatter'
