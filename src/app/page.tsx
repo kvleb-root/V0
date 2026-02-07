@@ -19,7 +19,7 @@ import { BarChart3, Zap } from 'lucide-react'
 
 export default function Home() {
   const { dataSources, loading: dsLoading, error, addDataSource, removeDataSource } = useDataSource()
-  const { messages, loading: chatLoading, sendMessage } = useChat(dataSources)
+  const { messages, sendMessage } = useChat(dataSources)
   const [anomalies, setAnomalies] = useState<Anomaly[]>([])
   const [activeTab, setActiveTab] = useState<'data' | 'analytics' | 'alerts'>('data')
 
@@ -166,7 +166,6 @@ export default function Home() {
                     </div>
                     <InsightChat
                       dataSources={dataSources}
-                      loading={chatLoading}
                       onSendMessage={sendMessage}
                     />
                   </div>

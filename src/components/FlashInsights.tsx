@@ -2,15 +2,14 @@
 
 import React, { useEffect, useState } from 'react'
 import { DataPoint } from '@/types/index'
-import { FlashInsight, generateFlashInsights, formatFlashInsight } from '@/lib/flash-insights'
+import { FlashInsight, generateFlashInsights } from '@/lib/flash-insights'
 import { AlertTriangle, TrendingUp, ShoppingCart, Calendar, AlertCircle, X } from 'lucide-react'
 
 interface FlashInsightsProps {
   data?: DataPoint[]
-  isLoading?: boolean
 }
 
-export function FlashInsights({ data = [], isLoading = false }: FlashInsightsProps) {
+export function FlashInsights({ data = [] }: FlashInsightsProps) {
   const [insights, setInsights] = useState<FlashInsight[]>([])
   const [dismissedIds, setDismissedIds] = useState<Set<string>>(new Set())
   const [filter, setFilter] = useState<'all' | 'high' | 'medium' | 'low'>('all')

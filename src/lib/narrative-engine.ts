@@ -69,7 +69,7 @@ function buildMainNarrative(question: string, results: QueryResult, data: DataPo
 /**
  * Génère une conclusion avec insights clés
  */
-function buildConclusion(question: string, results: QueryResult): string {
+function buildConclusion(_question: string, results: QueryResult): string {
   if (results.data.length === 0) {
     return `Aucune conclusion à tirer - pas de données trouvées.`
   }
@@ -103,27 +103,31 @@ function buildConclusion(question: string, results: QueryResult): string {
 /**
  * Génère une comparaison entre résultats
  */
-function buildComparison(question: string, results: QueryResult, data: DataPoint[]): string {
+function buildComparison(_question: string, results: QueryResult, _data: DataPoint[]): string {
   if (results.data.length < 2) {
-    return undefined
+    return ''
   }
 
-  const firstRow = results.data[0]
-  const secondRow = results.data[1]
-  const compareKey = Object.keys(firstRow)[0]
+  try {
+    const firstRow = results.data[0]
+    const secondRow = results.data[1]
+    const compareKey = Object.keys(firstRow)[0]
 
-  const val1 = firstRow[compareKey]
-  const val2 = secondRow[compareKey]
+    const val1 = firstRow[compareKey] as number
+    const val2 = secondRow[compareKey] as number
 
-  if (typeof val1 === 'number' && typeof val2 === 'number') {
-    const diff = val1 - val2
-    const percentChange = ((diff / val2) * 100).toFixed(1)
-    const direction = diff > 0 ? 'augmentation' : 'baisse'
+    if (typeof val1 === 'number' && typeof val2 === 'number') {
+      const diff = val1 - val2
+      const percentChange = ((diff / val2) * 100).toFixed(1)
+      const direction = diff > 0 ? 'augmentation' : 'baisse'
 
-    return `Comparaison: ${direction} de ${Math.abs(percentChange)}% entre les deux premiers résultats.`
+      return `Comparaison: ${direction} de ${Math.abs(Number(percentChange))}% entre les deux premiers résultats.`
+    }
+
+    return ''
+  } catch {
+    return ''
   }
-
-  return undefined
 }
 
 /**

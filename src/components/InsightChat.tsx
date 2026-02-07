@@ -8,11 +8,10 @@ import { Send, Loader, ChevronDown, Zap, BookOpen } from 'lucide-react'
 
 interface InsightChatProps {
   dataSources: DataSource[]
-  loading: boolean
   onSendMessage: (message: string) => Promise<QueryResult | null>
 }
 
-export function InsightChat({ dataSources, loading, onSendMessage }: InsightChatProps) {
+export function InsightChat({ dataSources, onSendMessage }: InsightChatProps) {
   const [messages, setMessages] = useState<(MessageType & { insight?: Insight; flashInsights?: FlashInsight[] })[]>([])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)

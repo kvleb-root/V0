@@ -78,8 +78,13 @@ function handleNulls(data: DataPoint[], stats: CleaningStats): DataPoint[] {
           .filter(v => v !== null && v !== undefined && v !== '')
 
         if (columnValues.length > 0 && typeof columnValues[0] === 'number') {
-          const avg = columnValues.reduce((a, b) => (a as number) + (b as number), 0) / columnValues.length
-          cleaned[key] = Math.round(avg as number)
+          const sum = columnValues.reduce((a, b) => {
+            const aNum = typeof a === 'number' ? a : 0
+            const bNum = typeof b === 'number' ? b : 0
+            return aNum + bNum
+          }, 0)
+          const avg = typeof sum === 'number' ? sum / columnValues.length : 0
+          cleaned[key] = Math.round(avg)
         } else {
           cleaned[key] = 'N/A'
         }
@@ -144,7 +149,7 @@ function fixDataTypes(data: DataPoint[], stats: CleaningStats): DataPoint[] {
           try {
             const date = new Date(String(value))
             if (!isNaN(date.getTime())) {
-              fixed[key] = date
+              fixed[key] = date.toISOString()
               stats.typesFixed++
             }
           } catch (e) {

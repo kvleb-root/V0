@@ -13,7 +13,7 @@ export function useChat(dataSources: DataSource[]) {
   const [loading, setLoading] = useState(false)
 
   const sendMessage = useCallback(
-    async (content: string) => {
+    async (content: string): Promise<QueryResult | null> => {
       // Ajouter le message de l'utilisateur
       const userMessage: Message = {
         id: `msg-${Date.now()}`,
@@ -36,7 +36,7 @@ export function useChat(dataSources: DataSource[]) {
             timestamp: new Date(),
           }
           setMessages(prev => [...prev, errorMessage])
-          return
+          return null
         }
 
         // Parser la question en français
@@ -63,6 +63,7 @@ export function useChat(dataSources: DataSource[]) {
         }
 
         setMessages(prev => [...prev, assistantMessage])
+        return results
       } catch (error) {
         const errorMessage: Message = {
           id: `msg-${Date.now()}-error`,
@@ -71,6 +72,7 @@ export function useChat(dataSources: DataSource[]) {
           timestamp: new Date(),
         }
         setMessages(prev => [...prev, errorMessage])
+        return null
       } finally {
         setLoading(false)
       }
