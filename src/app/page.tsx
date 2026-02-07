@@ -5,10 +5,11 @@ import {
   DragDropZone,
   DataTable,
   Chart,
-  ChatInterface,
+  InsightChat,
   Anomalies,
   DataSources,
   SupabaseConfig,
+  FlashInsights,
 } from '@/components'
 import { useDataSource } from '@/hooks/useDataSource'
 import { useChat } from '@/hooks/useChat'
@@ -50,11 +51,11 @@ export default function Home() {
                 <BarChart3 className="h-6 w-6 text-white" />
               </div>
               <h1 className="text-3xl sm:text-4xl font-bold gradient-text">
-                Data Intelligence Hub
+                Insight Engine
               </h1>
             </div>
             <p className="text-slate-400 text-sm sm:text-base">
-              Analysez vos données avec des insights alimentés par l'IA
+              Intelligence Engine avec narrations, alertes automatiques et analyse conversationnelle
             </p>
           </div>
         </div>
@@ -153,11 +154,18 @@ export default function Home() {
 
               {activeTab === 'analytics' && (
                 <div className="space-y-6">
-                  {/* Chat Interface */}
-                  <div className="glass rounded-xl p-6 h-96">
-                    <h3 className="text-lg font-semibold mb-4">Analyseur de données</h3>
-                    <ChatInterface
-                      messages={messages}
+                  {/* Flash Insights */}
+                  {dataSources.length > 0 && (
+                    <FlashInsights data={dataSources[0]?.data || []} />
+                  )}
+
+                  {/* Insight Chat Interface */}
+                  <div className="glass rounded-xl overflow-hidden h-[600px]">
+                    <div className="p-6">
+                      <h3 className="text-lg font-semibold mb-4">Intelligence Engine (Conversationnel)</h3>
+                    </div>
+                    <InsightChat
+                      dataSources={dataSources}
                       loading={chatLoading}
                       onSendMessage={sendMessage}
                     />
@@ -205,11 +213,11 @@ export default function Home() {
                 <BarChart3 className="h-16 w-16 mx-auto text-slate-400" />
                 <div>
                   <h3 className="text-xl font-semibold text-slate-100 mb-2">
-                    Bienvenue sur Data Intelligence Hub
+                    Bienvenue sur Insight Engine
                   </h3>
                   <p className="text-slate-400 mb-4">
-                    Commencez en important un fichier CSV ou Excel depuis la section "Données" à gauche,
-                    ou connectez-vous à une base de données Supabase pour analyser vos données avec l'IA.
+                    Commencez en important un fichier CSV ou Excel depuis la section "Données" à gauche.
+                    Découvrez des insights narratifs, des alertes automatiques et une analyse conversationnelle intelligente.
                   </p>
                 </div>
               </div>
@@ -221,7 +229,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="mt-12 border-t border-dark-700 pt-8">
         <div className="text-center text-sm text-slate-500">
-          <p>Data Intelligence Hub • Analysez, visualisez, optimisez vos données</p>
+          <p>Insight Engine • Intelligence artificielle | Narrations | Alertes automatiques | Conversationnel</p>
         </div>
       </footer>
     </div>
