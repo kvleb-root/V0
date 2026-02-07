@@ -13,7 +13,7 @@ import {
 import { useDataSource } from '@/hooks/useDataSource'
 import { useChat } from '@/hooks/useChat'
 import { detectAllAnomalies } from '@/lib/anomaly-detection'
-import { Anomaly, DataPoint } from '@/types/index'
+import { Anomaly } from '@/types/index'
 import { BarChart3, Zap } from 'lucide-react'
 
 export default function Home() {
